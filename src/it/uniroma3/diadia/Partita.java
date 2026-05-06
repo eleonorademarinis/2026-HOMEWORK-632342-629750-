@@ -18,6 +18,7 @@ public class Partita {
 //	private Stanza stanzaCorrente;
 //	private Stanza stanzaVincente;
 	private boolean finita;
+	private IO io;
 //	private int cfu;
 	Labirinto labirinto;
 	Giocatore giocatore;
@@ -111,4 +112,20 @@ public class Partita {
 //	public void setCfu(int cfu) {
 //		this.cfu = cfu;		
 //	}	
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
+	
+	public Giocatore getGiocatore() {
+		return this.giocatore;
+	}
+	
+	public void setIO (IO io) {
+		this.io = io; 
+		
+	}
+	
+	public IO getIO () {
+		return this.io;
+	}
 }
