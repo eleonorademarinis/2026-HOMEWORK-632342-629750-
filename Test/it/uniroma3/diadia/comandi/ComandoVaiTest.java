@@ -1,14 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.IOConsole;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVaiTest {
@@ -18,16 +20,25 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() {
-		partita = new Partita();
-		comandoVai = new ComandoVai();
-		IO io = new IOConsole();
-		this.partita.setIO(io);
+		 Labirinto labirinto = Labirinto.newBuilder()
+		            .addStanzaIniziale("atrio")
+		            .addStanzaVincente("biblioteca")
+		            .addAdiacenza("atrio", "biblioteca", Direzione.nord)
+		            .getLabirinto();
+
+		    partita = new Partita(labirinto);
+
+		    comandoVai = new ComandoVai();
+
+		    IO io = new IOSimulator();
+
+		    this.partita.setIO(io);
 	}
 
 	@Test
 	public void testVaiDirezioneValidaCambiaStanza() {
 		Stanza stanzaIniziale = partita.getLabirinto().getStanzaCorrente();
-		Stanza stanzaNord = stanzaIniziale.getStanzaAdiacente("nord");
+		Stanza stanzaNord = stanzaIniziale.getStanzaAdiacente(Direzione.nord);
 
 		comandoVai.setParametro("nord");
 		comandoVai.esegui(partita);

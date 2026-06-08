@@ -2,7 +2,7 @@ package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
-
+import it.uniroma3.diadia.ambienti.Direzione;
 /**
  * Questa classe modella una partita del gioco
  *
@@ -24,10 +24,16 @@ public class Partita {
 	Giocatore giocatore;
 	
 	public Partita(){
-		this.labirinto = new Labirinto(); 
+		this(Labirinto.newBuilder()
+	            .addLabirintoDefault()
+	            .getLabirinto());
+//		this.cfu = CFU_INIZIALI;
+	}
+	
+	public Partita(Labirinto labirinto) {
+		this.labirinto = labirinto; 
 		this.giocatore = new Giocatore();
 		this.finita = false;
-//		this.cfu = CFU_INIZIALI;
 	}
 
 //    /**
@@ -81,6 +87,9 @@ public class Partita {
 //		return this.stanzaCorrente;
 //	}
 //	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
 	 * @return vero se partita vinta

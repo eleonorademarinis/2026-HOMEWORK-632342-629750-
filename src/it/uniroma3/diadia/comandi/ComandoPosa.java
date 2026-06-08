@@ -5,8 +5,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoPosa implements Comando {
-	private String nomeAttrezzo;
+public class ComandoPosa extends AbstractComando {
+	
 	
 	/*
 	 * esecuzione del comando
@@ -14,6 +14,9 @@ public class ComandoPosa implements Comando {
 	 
 	@Override
 	public void esegui (Partita partita) {
+		
+		String nomeAttrezzo = this.getParametro();
+		
 		if (nomeAttrezzo == null) {
 			partita.getIO().mostraMessaggio("quale attrezzo vuoi posare?");
 			return;
@@ -36,20 +39,20 @@ public class ComandoPosa implements Comando {
 
 	}
 	
-	@Override
-    public String getNome() {
-        return "posa";
-    }
-
-    @Override
-    public String getParametro() {
-        return this.nomeAttrezzo;
-    }
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
-	}
-
+//	@Override
+//    public String getNome() {
+//        return "posa";
+//    }
+//
+//    @Override
+//    public String getParametro() {
+//        return this.nomeAttrezzo;
+//    }
+//
+//	@Override
+//	public void setParametro(String parametro) {
+//		this.nomeAttrezzo = parametro;
+//	}
+//
 
 }

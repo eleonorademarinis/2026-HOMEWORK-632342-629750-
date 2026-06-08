@@ -30,20 +30,20 @@ public class StanzaTest {
 
 	@Test
 	public void testGetStanzaAdiacentePresente() {
-		stanza.impostaStanzaAdiacente("nord", biblioteca);
-		assertEquals(biblioteca, stanza.getStanzaAdiacente("nord"));
+		stanza.impostaStanzaAdiacente(Direzione.nord, biblioteca);
+		assertEquals(biblioteca, stanza.getStanzaAdiacente(Direzione.nord));
 	}
 
 	@Test
 	public void testGetStanzaAdiacenteAssente() {
-		assertNull(stanza.getStanzaAdiacente("nord"));
+		assertNull(stanza.getStanzaAdiacente(Direzione.nord));
 	}
 
 	@Test
 	public void testGetStanzaAdiacenteDopoAggiornamento() {
-		stanza.impostaStanzaAdiacente("nord", biblioteca);
-		stanza.impostaStanzaAdiacente("nord", laboratorio);
-		assertEquals(laboratorio, stanza.getStanzaAdiacente("nord"));
+		stanza.impostaStanzaAdiacente(Direzione.nord, biblioteca);
+		stanza.impostaStanzaAdiacente(Direzione.nord, laboratorio);
+		assertEquals(laboratorio, stanza.getStanzaAdiacente(Direzione.nord));
 	}
 
 	/* 

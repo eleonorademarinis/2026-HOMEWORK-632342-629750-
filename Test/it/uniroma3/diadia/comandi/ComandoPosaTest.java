@@ -1,7 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +24,8 @@ public class ComandoPosaTest {
 		partita = new Partita();
 		comandoPosa = new ComandoPosa();
 		spada = new Attrezzo("spada", 1);
-		IO io = new IOConsole();
+		
+		IO io = new IOSimulator();
 		this.partita.setIO(io);
 	}
 

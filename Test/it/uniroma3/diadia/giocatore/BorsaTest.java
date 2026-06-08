@@ -1,6 +1,9 @@
 package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
+import java.util.*;
+
+import java.util.SortedSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -84,5 +87,69 @@ public class BorsaTest {
 		borsa.addAttrezzo(osso);
 		borsa.removeAttrezzo("osso");
 		assertFalse(borsa.hasAttrezzo("osso"));
+	}
+	
+	@Test
+	public void testSortedSetConStessoPesoMantieneEntrambi() {
+
+	    Attrezzo osso = new Attrezzo("osso", 1);
+	    Attrezzo chiave = new Attrezzo("chiave", 1);
+
+	    borsa.addAttrezzo(osso);
+	    borsa.addAttrezzo(chiave);
+
+	    SortedSet<Attrezzo> insieme =
+	            borsa.getSortedSetOrdinatoPerPeso();
+
+	    assertEquals(2, insieme.size());
+	}
+	
+	@Test
+	public void testContenutoOrdinatoPerPeso() {
+
+	    Attrezzo piuma = new Attrezzo("piuma", 1);
+	    Attrezzo libro = new Attrezzo("libro", 5);
+
+	    borsa.addAttrezzo(libro);
+	    borsa.addAttrezzo(piuma);
+
+	    List<Attrezzo> lista =
+	            borsa.getContenutoOrdinatoPerPeso();
+
+	    assertEquals(piuma, lista.get(0));
+	    assertEquals(libro, lista.get(1));
+	}
+	
+	@Test
+	public void testContenutoOrdinatoPerNome() {
+
+	    Attrezzo zaino = new Attrezzo("zaino", 1);
+	    Attrezzo libro = new Attrezzo("libro", 1);
+
+	    borsa.addAttrezzo(zaino);
+	    borsa.addAttrezzo(libro);
+
+	    SortedSet<Attrezzo> insieme =
+	            borsa.getContenutoOrdinatoPerNome();
+
+	    assertEquals("libro", insieme.first().getNome());
+	}
+	
+	@Test
+	public void testContenutoRaggruppatoPerPeso() {
+
+	    Attrezzo osso = new Attrezzo("osso", 1);
+	    Attrezzo chiave = new Attrezzo("chiave", 1);
+	    Attrezzo libro = new Attrezzo("libro", 5);
+
+	    borsa.addAttrezzo(osso);
+	    borsa.addAttrezzo(chiave);
+	    borsa.addAttrezzo(libro);
+
+	    Map<Integer, Set<Attrezzo>> mappa =
+	            borsa.getContenutoRaggruppatoPerPeso();
+
+	    assertEquals(2, mappa.get(1).size());
+	    assertEquals(1, mappa.get(5).size());
 	}
 }

@@ -1,12 +1,13 @@
 package it.uniroma3.diadia;
 
-
+import java.util.Scanner;
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.*;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi.*;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.giocatore.Borsa;
+import it.uniroma3.diadia.ambienti.Labirinto;
+
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -32,13 +33,19 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
+//	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
 	private IO io;
 
 	public DiaDia(IO io) {
 		this.partita = new Partita();
+		this.io = io;
+		this.partita.setIO(io);
+	}
+	
+	public DiaDia(Labirinto labirinto, IO io) {
+		this.partita = new Partita(labirinto);
 		this.io = io;
 		this.partita.setIO(io);
 	}
@@ -59,7 +66,7 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		 FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		 FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		    Comando comandoDaEseguire = factory.costruisciComando(istruzione);
 
 		    comandoDaEseguire.esegui(this.partita);
@@ -168,8 +175,10 @@ public class DiaDia {
 //	}
 
 	public static void main(String[] argc) {
-		IO io = new IOConsole(); 
-		DiaDia gioco = new DiaDia(io);
-		gioco.gioca();
+	    try (Scanner scannerDiLinee = new Scanner(System.in)) {
+	        IO io = new IOConsole(scannerDiLinee);
+	        DiaDia gioco = new DiaDia(io);
+	        gioco.gioca();
+	    }
 	}
 }

@@ -1,5 +1,5 @@
 package it.uniroma3.diadia.comandi;
-
+import it.uniroma3.diadia.*;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 
@@ -20,7 +20,7 @@ public class ComandoPrendiTest {
 	public void setUp() {
 		partita = new Partita();
 		comandoPrendi = new ComandoPrendi();
-		IO io = new IOConsole();
+		IO io = new IOSimulator();
 		this.partita.setIO(io);
 	}
 

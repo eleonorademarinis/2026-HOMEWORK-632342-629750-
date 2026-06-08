@@ -2,7 +2,7 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 
-public class ComandoFine implements Comando {
+public class ComandoFine extends AbstractComando {
 	
 	@Override
 	public void esegui (Partita partita) {
@@ -11,18 +11,18 @@ public class ComandoFine implements Comando {
 
 	}
 	
-	@Override
-	public String getNome() {
-        return "fine";
-	}
-
-    @Override
-    public String getParametro() {
-        return null; // oppure ""
-    }
-	
-	@Override
-	public void setParametro(String parametro) {
-	    // non serve
-	}
+//	@Override
+//	public String getNome() {
+//        return "fine";
+//	}
+//
+//    @Override
+//    public String getParametro() {
+//        return null; // oppure ""
+//    }
+//	
+//	@Override
+//	public void setParametro(String parametro) {
+//	    // non serve
+//	}
 }
